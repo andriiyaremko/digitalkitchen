@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/digital-kitchen-application.iml" filepath="$PROJECT_DIR$/.idea/modules/digital-kitchen-application.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/digital-kitchen-application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/digital-kitchen-application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/digital-kitchen-ui/digital-kitchen-ui.iml" filepath="$PROJECT_DIR$/digital-kitchen-ui/digital-kitchen-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/digitalkitchen.iml" filepath="$PROJECT_DIR$/.idea/digitalkitchen.iml" />
     </modules>
   </component>
