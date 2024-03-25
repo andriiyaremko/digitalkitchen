@@ -1,0 +1,11 @@
+.recipe-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.recipe-modal-body{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

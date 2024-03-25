@@ -1,0 +1,21 @@
+.category-block{
+}
+.category-block-header{
+    display: flex;
+    justify-content: space-between;
+}
+.category-list{
+    display: flex;
+    gap: 15px;
+    margin-top: 80px;
+    flex-wrap: wrap;
+}
+.category-header-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E7FAFE;
+    padding: 20px 27px;
+    font-size: 16px;
+    font-weight: bolder;
+}

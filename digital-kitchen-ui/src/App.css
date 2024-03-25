@@ -1,0 +1,14 @@
+*{
+    font-family: -apple-system, system-ui, BlinkMacSystemFont !important;
+}
+html{
+    padding: 0;
+    margin: 0;
+}
+body{
+    padding: 40px;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
