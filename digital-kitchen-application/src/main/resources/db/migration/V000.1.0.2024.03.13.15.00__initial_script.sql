@@ -30,8 +30,11 @@ CREATE TABLE IF NOT EXISTS public.recipe
 (
     id UUID NOT NULL,
     name VARCHAR NOT NULL,
-    category_id UUID NOT NULL,
+    category UUID NOT NULL,
     description VARCHAR,
+    author UUID NOT NULL,
+    image VARCHAR,
+    time VARCHAR,
     CONSTRAINT recipe_pk PRIMARY KEY (id)
 );
 

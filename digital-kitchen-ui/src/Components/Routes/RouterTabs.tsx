@@ -10,18 +10,18 @@ const RouterTabs = () => {
     return (
         <Tabs
             centered={true}
-            activeKey={pathname.toLowerCase()}
+            activeKey={pathname.split('/')[1].toLowerCase()}
             className={"routes"}
             onChange={(path) => {
                 navigate(`../${path}`);
             }}
         >
-            <Tabs.TabPane tab={'Home'} key={'/home'} />
-            <Tabs.TabPane tab={"Recipes"} key={'/recipes'}/>
-            <Tabs.TabPane tab={"Blog"} key={'/blog'}/>
-            <Tabs.TabPane tab={"Contact"} key={'/contact'}/>
-            <Tabs.TabPane tab={"About Us"} key={'/aboutus'}/>
-            <Tabs.TabPane tab={"Settings"} key={'/settings'}/>
+            <Tabs.TabPane tab={'Home'} key={'home'} />
+            <Tabs.TabPane tab={"Recipes"} key={'recipes'}/>
+            <Tabs.TabPane tab={"Blog"} key={'blog'}/>
+            <Tabs.TabPane tab={"Contact"} key={'contact'}/>
+            <Tabs.TabPane tab={"About Us"} key={'aboutus'}/>
+            <Tabs.TabPane tab={"Settings"} key={'settings'}/>
         </Tabs>
     );
 }

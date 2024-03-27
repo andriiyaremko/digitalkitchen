@@ -10,8 +10,11 @@ export type Ingredient = {
 export type Recipe = {
     id: string;
     name:string;
+    image?:string;
     category:string;
     description:string;
+    time:string;
+    author:string;
     ingredients:Ingredient[];
 }
 
@@ -33,6 +36,10 @@ const ProductApi = {
         return axios.put(URL, recipe)
             .then((response) => response.data);
     },
+    findById(id:string){
+        return axios.get(`${URL}/${id}`)
+            .then((response) =>response.data)
+    }
 }
 
 export default ProductApi

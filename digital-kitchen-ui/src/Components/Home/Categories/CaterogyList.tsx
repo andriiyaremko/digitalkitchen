@@ -12,7 +12,7 @@ const CaterogyList = () => {
         <div className='category-block'>
             <div className='category-block-header'>
                 <h2>Categories</h2>
-                <Link to={'/allcategories'}>
+                <Link to={'/home/categories'}>
                     <Button className='category-header-link'>View All Categories</Button>
                 </Link>
             </div>

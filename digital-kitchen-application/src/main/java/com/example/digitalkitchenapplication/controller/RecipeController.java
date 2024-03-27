@@ -5,6 +5,7 @@ import com.example.digitalkitchenapplication.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -16,6 +17,11 @@ public class RecipeController {
     @GetMapping
     public Iterable<Recipe> getCategories(){
         return recipeService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Recipe> getCategoryById(@PathVariable("id") UUID id){
+        return recipeService.findById(id);
     }
 
     @PostMapping

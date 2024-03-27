@@ -1,6 +1,7 @@
 package com.example.digitalkitchenapplication.data.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,13 +18,21 @@ public class Recipe {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @NotNull
     private String name;
 
     private UUID category;
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @NotNull
+    private UUID author;
+
+    private String image;
+
+    private String time;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "recipeId")
     private List<Ingredient> ingredients;
 }

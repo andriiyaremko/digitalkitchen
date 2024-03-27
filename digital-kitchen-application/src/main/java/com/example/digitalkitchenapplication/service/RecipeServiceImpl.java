@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,7 +31,12 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public Recipe update(Recipe recipe) {
+    public Recipe update(Recipe recipe){
         return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Optional<Recipe> findById(UUID id){
+        return recipeRepository.findById(id);
     }
 }

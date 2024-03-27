@@ -1,0 +1,19 @@
+.recipe-information{
+    display: flex;
+    gap:90px
+}
+.recipe-info-block{
+    display: flex;
+    gap:15px;
+}
+.recipe-info-text{
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    gap:10px
+}
+.recipe-description{
+    margin-top: 40px;
+    line-height: 28px;
+    font-size: 16px;
+}

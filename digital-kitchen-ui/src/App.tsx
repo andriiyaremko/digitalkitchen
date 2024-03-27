@@ -19,6 +19,7 @@ import ProductsContext from "./Components/Settings/SettingsPages/Product/Product
 import ProductApi from "./Api/ProductApi";
 import RecipeApi from "./Api/RecipeApi";
 import RecipesContext from "./Components/Recipes/RecipesContext";
+import RecipePage from "./Components/Recipes/RecipePage/RecipePage";
 
 function App() {
 
@@ -44,10 +45,11 @@ function App() {
                     <Route path="/create user" element={<CreateUser/>}/>
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/recipes" element={<Recipes/>}/>
+                    <Route path="/recipes/:recipeId" element={<RecipePage/>}/>
                     <Route path="/blog" element={<Blog/>}/>
                     <Route path="/contact" element={<Contact/>}/>
                     <Route path="/aboutus" element={<AboutUs/>}/>
-                    <Route path="/allcategories" element={<AllCategoriesList/>}/>
+                    <Route path="/home/categories" element={<AllCategoriesList/>}/>
                     {user?.role === 'ADMIN' ? <Route path="/settings" element={<Settings/>}/> : null}
                     <Route path="*" element={user ? <Navigate to={'/home'}/> :<Navigate to={'/login'}/>}/>
                 </Routes>

@@ -5,6 +5,7 @@ import RecipesContext from "../RecipesContext";
 import CategoryContext from "../../Settings/SettingsPages/Category/CategoryContext";
 import ProductsContext from "../../Settings/SettingsPages/Product/ProductContext";
 import '../Recipe.css';
+import {useUserStore} from "../../../Store/userStore";
 
 const { TextArea } = Input;
 
@@ -17,6 +18,8 @@ const RecipeModal = ({
     open:boolean;
     onDone:() => void;
 }) => {
+
+    const {user} = useUserStore()
 
     const [form] = Form.useForm();
 
@@ -67,6 +70,7 @@ const RecipeModal = ({
             .then((newRecipe) => {
                 const mergedValues: Recipe = {
                     ...newRecipe,
+                    ingredients:selectedIngredients,
                     id: recipe?.id,
                 };
                 save(mergedValues)
@@ -104,6 +108,7 @@ const RecipeModal = ({
                 form={form}
             >
                 <Form.Item name="id" hidden={true} />
+                <Form.Item name="author" initialValue={user?.id} hidden={true} />
                 <Form.Item
                     name="name"
                     label="Recipe:"
@@ -135,6 +140,13 @@ const RecipeModal = ({
                     initialValue={recipe?.description}
                 >
                     <TextArea rows={4} placeholder="Add the description"/>
+                </Form.Item>
+                <Form.Item
+                    name='time'
+                    label='Time of cooking:'
+                    initialValue={recipe?.time}
+                >
+                    <Input placeholder="Enter cooking time"/>
                 </Form.Item>
                 <div>
                     <div>
