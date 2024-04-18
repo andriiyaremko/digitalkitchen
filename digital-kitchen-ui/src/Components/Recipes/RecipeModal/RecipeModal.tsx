@@ -119,9 +119,9 @@ const RecipeModal = ({
                 </Form.Item>
 
                 <Form.Item
-                    name="category"
+                    name="categoryId"
                     label="Category:"
-                    initialValue={recipe?.category}
+                    initialValue={recipe?.categoryId}
                     style={{marginTop:'20px'}}
                 >
                     <Select

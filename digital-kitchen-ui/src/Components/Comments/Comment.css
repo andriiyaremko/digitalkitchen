@@ -1,0 +1,22 @@
+.comment{
+    margin-top: 15px;
+    padding: 20px;
+    border: 1px solid #3d3d3d;
+}
+.comment-user-info{
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+.comment-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-text{
+    margin-top: 10px;
+}
+.new-comment-button{
+    margin-top: 20px;
+    margin-left: calc(100% - 122px);
+}

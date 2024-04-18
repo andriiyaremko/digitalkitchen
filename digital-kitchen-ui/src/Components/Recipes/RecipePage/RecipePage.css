@@ -1,3 +1,11 @@
+.recipe-header{
+    display: flex;
+    gap: 300px;
+}
+.recipe-header-start{
+    display: flex;
+    flex-direction: column;
+}
 .recipe-information{
     display: flex;
     gap:90px
@@ -13,7 +21,9 @@
     gap:10px
 }
 .recipe-description{
+    display: block;
     margin-top: 40px;
     line-height: 28px;
     font-size: 16px;
+    white-space: pre-wrap;
 }

@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS public.product
     image VARCHAR,
     category_id UUID NOT NULL,
     unit VARCHAR NOT NULL,
+    calories VARCHAR NOT NULL,
     CONSTRAINT product_pk PRIMARY KEY (id)
 );
 
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS public.ingredient
 (
     id UUID NOT NULL,
     product_id UUID NOT NULL,
-    recipe_id UUID NOT NULL,
+    recipe_id UUID,
     value VARCHAR NOT NULL,
     CONSTRAINT ingredient_pk PRIMARY KEY (id),
 
@@ -51,4 +52,14 @@ CREATE TABLE IF NOT EXISTS public.ingredient
 
     CONSTRAINT fk_recipe_id
         FOREIGN KEY(recipe_id)   REFERENCES public.recipe(id)
+);
+
+CREATE TABLE IF NOT EXISTS public.comment
+(
+    id UUID NOT NULL,
+    recipe_id UUID,
+    author_id UUID,
+    text VARCHAR,
+    rating INT,
+    CONSTRAINT comment_id PRIMARY KEY (id)
 );

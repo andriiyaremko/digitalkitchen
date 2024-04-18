@@ -11,7 +11,7 @@ export type Recipe = {
     id: string;
     name:string;
     image?:string;
-    category:string;
+    categoryId:string;
     description:string;
     time:string;
     author:string;

@@ -1,32 +1,50 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import RecipesContext from "../RecipesContext";
 import {Card} from "antd";
-import {Link} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {Recipe} from "../../../Api/RecipeApi";
+import ProductsContext from "../../Settings/SettingsPages/Product/ProductContext";
 
 const RecipeList = () => {
 
-    const {recipes} = useContext(RecipesContext)
+    const {recipes} = useContext(RecipesContext);
+
+    const navigate = useNavigate();
+
+    const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes);
+
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const category = searchParams.get("category");
+
+    useEffect(() => {
+        if (category){
+            setFilteredRecipes(recipes.filter(rec => rec.categoryId === category))
+        }
+    }, []);
 
     return (
         <div style={{display:"flex", gap:'50px', flexWrap:'wrap'}}>
-            {recipes.map(recipe => {
+            {filteredRecipes.map(recipe => {
                 return (
 
-                        <Card
-                            key={recipe.id}
-                            style={{width:"30%"}}
-                            title={
-                            <Link
-                                style={{display:"block"}}
-                                to={`/recipes/${recipe.id}`}
-                            >
-                                {recipe.name}
-                            </Link>
+                    <Card
+                        key={recipe.id}
+                        style={{width: "30%", cursor: 'pointer'}}
+                        onClick={() => navigate(`/recipes/${recipe.id}`)}
+                        title={
+                            <img style={{width: '100%'}}  src={recipe.image} alt=""/>
                         }
-                        >
-
-                                {recipe.description}
-                        </Card>
+                    >
+                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                            <div>
+                                {recipe.name}
+                            </div>
+                            <div>
+                                {recipe.time} minutes
+                            </div>
+                        </div>
+                    </Card>
 
                 )
             })}

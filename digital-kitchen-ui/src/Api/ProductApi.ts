@@ -6,6 +6,7 @@ export type Product = {
     image?: string;
     categoryId:string;
     unit:string;
+    calories: string;
 }
 
 const URL = 'http://localhost:8080/api/product'

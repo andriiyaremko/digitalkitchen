@@ -1,0 +1,27 @@
+version: "3.8"
+
+networks:
+  digital-kitchen-net:
+    driver: bridge
+
+services:
+  digital-kitchen-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: jdbc:postgresql://db:5432/digitalkitchen
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${DB_USER:-admin}" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    stdin_open: true
+    tty: true
+    networks:
+      - digital-kitchen-net
+
+  # Define other services here

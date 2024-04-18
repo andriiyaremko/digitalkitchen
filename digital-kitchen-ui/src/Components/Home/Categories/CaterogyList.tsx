@@ -19,7 +19,7 @@ const CaterogyList = () => {
             <div className='category-list'>
                 {
                     categories.slice(0, categories.length > 5 ? 5 : categories.length).map(cat =>{
-                        return (<Category name={cat.name} description={cat.name}/>)
+                        return (<Category id={cat.id} name={cat.name} description={cat.name}/>)
                     })
                 }
             </div>

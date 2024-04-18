@@ -11,25 +11,25 @@ import Settings from "./Components/Settings/Settings";
 import CreateUser from "./Components/Login/Authorization/CreateUser";
 import Home from "./Components/Home/Home";
 import Recipes from "./Components/Recipes/Recipes";
-import Blog from "./Components/Blog/Blog";
-import Contact from "./Components/Contact/Contact";
-import AboutUs from "./Components/AboutUs/AboutUs";
 import AllCategoriesList from "./Components/Home/Categories/AllCategoriesList";
 import ProductsContext from "./Components/Settings/SettingsPages/Product/ProductContext";
 import ProductApi from "./Api/ProductApi";
 import RecipeApi from "./Api/RecipeApi";
 import RecipesContext from "./Components/Recipes/RecipesContext";
 import RecipePage from "./Components/Recipes/RecipePage/RecipePage";
+import UsersContext from "./Components/Users/UsersContext";
+import UserApi from "./Api/UserApi";
 
 function App() {
 
     const {setCategories} = useContext(CategoryContext);
     const {setProducts} = useContext(ProductsContext);
-    const {setRecipes} = useContext(RecipesContext)
+    const {setRecipes} = useContext(RecipesContext);
+    const {setUsers} = useContext(UsersContext);
     const {user} = useUserStore();
 
-
     useEffect(() => {
+        UserApi.getUsers().then(setUsers);
         CategoryApi.getCategories().then(setCategories);
         ProductApi.getProducts().then(setProducts);
         RecipeApi.getRecipes().then(setRecipes);
@@ -40,19 +40,19 @@ function App() {
             <Header />
             <BrowserRouter>
                 {user && <RouterTabs/>}
-                <Routes>
-                    <Route path="/login" element={user ? <Navigate to={'/'}/> : <Login />} />
-                    <Route path="/create user" element={<CreateUser/>}/>
+                {user ? <Routes>
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/recipes" element={<Recipes/>}/>
                     <Route path="/recipes/:recipeId" element={<RecipePage/>}/>
-                    <Route path="/blog" element={<Blog/>}/>
-                    <Route path="/contact" element={<Contact/>}/>
-                    <Route path="/aboutus" element={<AboutUs/>}/>
                     <Route path="/home/categories" element={<AllCategoriesList/>}/>
                     {user?.role === 'ADMIN' ? <Route path="/settings" element={<Settings/>}/> : null}
-                    <Route path="*" element={user ? <Navigate to={'/home'}/> :<Navigate to={'/login'}/>}/>
+                    <Route path="*" element={<Navigate to={'/home'}/>}/>
                 </Routes>
+                : <Routes>
+                    <Route path="*" element={<Login/>}/>
+                    <Route path="/create user" element={<CreateUser/>}/>
+                    </Routes>
+                }
             </BrowserRouter>
         </>
     );

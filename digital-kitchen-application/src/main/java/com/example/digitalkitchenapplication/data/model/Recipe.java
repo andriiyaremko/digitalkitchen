@@ -21,7 +21,7 @@ public class Recipe {
     @NotNull
     private String name;
 
-    private UUID category;
+    private UUID categoryId;
 
     private String description;
 

@@ -12,7 +12,7 @@ const AllCategoriesList = () => {
             <div className='category-list'>
                 {
                     categories.map(cat =>{
-                        return (<Category name={cat.name} description={cat.name}/>)
+                        return (<Category id={cat.id} name={cat.name} description={cat.name}/>)
                     })
                 }
             </div>
