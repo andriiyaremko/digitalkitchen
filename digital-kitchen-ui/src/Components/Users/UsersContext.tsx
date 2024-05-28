@@ -1,6 +1,5 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, ReactNode, useState} from "react";
 import {User} from "../../Api/UserApi";
-
 
 export type UsersContextType = {
     users: User[],
@@ -9,7 +8,7 @@ export type UsersContextType = {
 
 const UsersContext = createContext<UsersContextType>(undefined!);
 
-export const UsersProvider = ({children}: { children: JSX.Element }) => {
+export const UsersProvider = ({children}: { children: ReactNode }) => {
     const [users, setUsers] = useState<User[]>([]);
 
     return (

@@ -36,3 +36,5 @@ public class Recipe {
     @JoinColumn(name = "recipeId")
     private List<Ingredient> ingredients;
 }
+
+

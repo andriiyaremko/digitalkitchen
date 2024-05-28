@@ -1,11 +1,12 @@
 import React, {useContext, useState} from "react";
-import {Button, Form, Input, message, Modal, Select} from "antd";
+import {Button, Form, Input, message, Modal, Select, Upload} from "antd";
 import RecipeApi, {Ingredient, Recipe} from "../../../Api/RecipeApi";
 import RecipesContext from "../RecipesContext";
 import CategoryContext from "../../Settings/SettingsPages/Category/CategoryContext";
 import ProductsContext from "../../Settings/SettingsPages/Product/ProductContext";
 import '../Recipe.css';
 import {useUserStore} from "../../../Store/userStore";
+import {UploadOutlined} from "@ant-design/icons";
 
 const { TextArea } = Input;
 
@@ -114,6 +115,7 @@ const RecipeModal = ({
                     label="Recipe:"
                     initialValue={recipe?.name}
                     style={{marginTop:'20px'}}
+                    rules={[{ required: true}]}
                 >
                     <Input placeholder="Recipe" style={{ width: "100%" }} />
                 </Form.Item>
@@ -138,6 +140,7 @@ const RecipeModal = ({
                     name='description'
                     label='Description:'
                     initialValue={recipe?.description}
+                    rules={[{ required: true}]}
                 >
                     <TextArea rows={4} placeholder="Add the description"/>
                 </Form.Item>
@@ -145,6 +148,7 @@ const RecipeModal = ({
                     name='time'
                     label='Time of cooking:'
                     initialValue={recipe?.time}
+                    rules={[{ required: true}]}
                 >
                     <Input placeholder="Enter cooking time"/>
                 </Form.Item>
@@ -180,7 +184,9 @@ const RecipeModal = ({
                         </div>
                     </div>
                 </div>
-
+                <Upload>
+                    <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
             </Form>
             {selectedIngredients?.length > 0 ? selectedIngredients.map(ingr => {
                 let product = products.find(pr => pr.id === ingr.productId)

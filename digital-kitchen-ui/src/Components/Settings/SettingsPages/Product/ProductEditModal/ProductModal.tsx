@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Button, Form, Input, message, Modal, Select} from "antd";
+import {Button, Form, Input, InputNumber, message, Modal, Select} from "antd";
 import ProductsContext from "../ProductContext";
 import ProductApi, {Product} from "../../../../../Api/ProductApi";
 import CategoryContext from "../../Category/CategoryContext";
@@ -114,6 +114,17 @@ const ProductModal = ({
                             label:"Cups",
                             value:'cups'
                         }]}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    name="calories"
+                    label="Calories:"
+                    style={{marginTop:'20px'}}
+                >
+                    <InputNumber
+                        style={{width:'100%'}}
+                        placeholder="Enter a calories value"
                     />
                 </Form.Item>
             </Form>

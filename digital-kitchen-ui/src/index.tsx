@@ -9,6 +9,7 @@ import {
 import {RecipeProvider} from "./Components/Recipes/RecipesContext";
 import {CommentProvider} from "./Components/Comments/CommentsContext";
 import {UsersProvider} from "./Components/Users/UsersContext";
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

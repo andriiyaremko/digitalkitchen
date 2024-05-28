@@ -31,7 +31,7 @@ const Settings = () => {
 
     const menuItems: MenuProps['items'] = [
         getItem("Category","Category"),
-        getItem("Ingredients", "Ingredients"),
+        getItem("Products", "Ingredients"),
     ]
 
     const [selectedMenuItem, setSelectedMenuItem] = useState<any>(menuItems[0]);

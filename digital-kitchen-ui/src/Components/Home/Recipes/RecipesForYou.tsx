@@ -10,7 +10,7 @@ const RecipesForYou = () => {
 
     return (
         <div style={{display: "flex", gap: '50px', flexWrap: 'wrap', marginTop:"50px"}}>
-            {recipes.slice(0, recipes.length > 2 ? 2 : recipes.length).map(recipe => {
+            {recipes.slice(0, recipes.length > 2 ? 3 : recipes.length).map(recipe => {
                     return (
                         <Card
                             key={recipe.id}

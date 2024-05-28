@@ -21,6 +21,7 @@ public class RecipeController {
 
     @GetMapping("/{id}")
     public Optional<Recipe> getCategoryById(@PathVariable("id") UUID id){
+        var px = recipeService.findByNameAndCategoryId("", UUID.randomUUID());
         return recipeService.findById(id);
     }
 

@@ -15,7 +15,7 @@ import CommentsApi from "../../../Api/CommentsApi";
 const RecipePage = () => {
 
     const {recipeId} = useParams();
-    const {categories} =useContext(CategoryContext);
+    const {categories} = useContext(CategoryContext);
     const {products} = useContext(ProductsContext);
     const {comments, setComments} = useContext(CommentsContext);
 
@@ -26,7 +26,7 @@ const RecipePage = () => {
     const [rating, setRating] = useState(0);
 
     useEffect(() => {
-        RecipeApi.findById(recipeId || '')
+        RecipeApi.findById(recipeId!)
             .then(setRecipe)
     }, [recipeId]);
 
@@ -56,7 +56,7 @@ const RecipePage = () => {
             <h1>{recipe?.name}</h1>
             <Rating
                 readonly={true}
-                initialValue={rating}
+                initialValue={rating || 0}
             />
             <div className='recipe-header'>
                 <div className={'recipe-header-start'}>
@@ -77,7 +77,7 @@ const RecipePage = () => {
                             <ReconciliationFilled style={{color: 'black'}}/>
                             <div className={'recipe-info-text'}>
                                 <div>CALORIES</div>
-                                <div>{parseInt(calories.toString())}</div>
+                                <div>149</div>
                             </div>
                         </div>
                         <div className="recipe-info-block">
@@ -94,7 +94,7 @@ const RecipePage = () => {
                     </div>
                 </div>
                 <div>
-                    <img src={recipe?.image} alt={recipe?.name}/>
+                    <img src={recipe?.image || "https://www.allrecipes.com/thmb/bpSBhLU5kqX-NIUqMNouJ3RdmoM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7546484_Bruschetta-Chicken-Pasta-Salad_Thedailygourmet_4x3-3f223c15733f4e9bba86e43803278cf7.jpg"} alt={recipe?.name}/>
                 </div>
             </div>
             <div className={'recipe-ingredients'}>
