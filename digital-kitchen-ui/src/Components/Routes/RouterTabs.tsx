@@ -21,6 +21,7 @@ const RouterTabs = () => {
         >
             <Tabs.TabPane tab={'Home'} key={'home'} />
             <Tabs.TabPane tab={"Recipes"} key={'recipes'}/>
+            <Tabs.TabPane tab={"Personal cabinet"} key={"personal_cabinet"} />
             {user?.role === "ADMIN" && <Tabs.TabPane tab={"Settings"} key={'settings'}/>}
         </Tabs>
     );

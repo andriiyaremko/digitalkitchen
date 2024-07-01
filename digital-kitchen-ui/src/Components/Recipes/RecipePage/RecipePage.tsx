@@ -1,7 +1,14 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import RecipeApi, {Recipe} from "../../../Api/RecipeApi";
-import {ClockCircleFilled, InfoCircleFilled, ReconciliationFilled} from "@ant-design/icons";
+import {
+    ClockCircleFilled,
+    HeartFilled,
+    HeartOutlined,
+    HeartTwoTone,
+    InfoCircleFilled,
+    ReconciliationFilled
+} from "@ant-design/icons";
 import CategoryContext from "../../Settings/SettingsPages/Category/CategoryContext";
 import './RecipePage.css'
 import {Avatar, List} from "antd";
@@ -11,10 +18,15 @@ import CommentsList from "../../Comments/CommentsList";
 import NewComment from "../../Comments/NewComment";
 import CommentsContext from "../../Comments/CommentsContext";
 import CommentsApi from "../../../Api/CommentsApi";
+import RecipeContext from "../RecipesContext";
+import {useUserStore} from "../../../Store/userStore";
 
 const RecipePage = () => {
 
+    const {user} = useUserStore();
+
     const {recipeId} = useParams();
+    const {favorites, setFavorites} = useContext(RecipeContext);
     const {categories} = useContext(CategoryContext);
     const {products} = useContext(ProductsContext);
     const {comments, setComments} = useContext(CommentsContext);
@@ -32,7 +44,7 @@ const RecipePage = () => {
 
     useEffect(() => {
         let calories = recipe?.ingredients.reduce((acc, ingredient) => {
-                return acc + Number(products.find(product => product.id === ingredient.productId)?.calories)/ Number(ingredient.value);
+                return acc + Number(products.find(product => product.id === ingredient.productId)?.calories)/ Number(ingredient.value) * 100;
             },0);
         setCalories(calories || 0)
     }, [recipe]);
@@ -53,7 +65,34 @@ const RecipePage = () => {
 
     return (
         <div style={{backgroundColor:'#fff'}}>
-            <h1>{recipe?.name}</h1>
+            <div style={{display:"flex", justifyContent:"space-between"}}>
+                <h1>{recipe?.name}</h1>
+                {favorites.find(rec=> rec.recipeId === recipe?.id) ? <HeartFilled
+                    onClick={()=>{
+                        let id = favorites.find(rec=> rec.recipeId === recipe?.id)?.id
+                        RecipeApi.removeFromFavorite(id || '').then(()=> {
+                            RecipeApi.findFavorites(user!.id).then(setFavorites)
+                        })
+                    }}
+                    style={{
+                        color:"red",
+                        fontSize: "40px",
+                        cursor: "pointer"
+                    }}
+                /> : <HeartOutlined
+                    onClick={()=>{
+                        RecipeApi.addToFavorite({id:"", recipeId: recipe?.id || '', personId: user!.id}).then(()=> {
+                            RecipeApi.findFavorites(user!.id).then(setFavorites)
+                        })
+                    }}
+                    type={"filled"}
+                    style={{
+                        color:"red",
+                    fontSize: "40px",
+                    cursor: "pointer"
+                }}
+                    />}
+            </div>
             <Rating
                 readonly={true}
                 initialValue={rating || 0}
@@ -77,7 +116,7 @@ const RecipePage = () => {
                             <ReconciliationFilled style={{color: 'black'}}/>
                             <div className={'recipe-info-text'}>
                                 <div>CALORIES</div>
-                                <div>149</div>
+                                <div>{parseInt(calories.toString())}</div>
                             </div>
                         </div>
                         <div className="recipe-info-block">

@@ -19,21 +19,25 @@ import RecipesContext from "./Components/Recipes/RecipesContext";
 import RecipePage from "./Components/Recipes/RecipePage/RecipePage";
 import UsersContext from "./Components/Users/UsersContext";
 import UserApi from "./Api/UserApi";
+import PersonalInfo from "./Components/PesonalInfo";
 
 function App() {
 
     const {setCategories} = useContext(CategoryContext);
     const {setProducts} = useContext(ProductsContext);
-    const {setRecipes} = useContext(RecipesContext);
+    const {setRecipes, setFavorites} = useContext(RecipesContext);
     const {setUsers} = useContext(UsersContext);
     const {user} = useUserStore();
 
     useEffect(() => {
-        UserApi.getUsers().then(setUsers);
-        CategoryApi.getCategories().then(setCategories);
-        ProductApi.getProducts().then(setProducts);
-        RecipeApi.getRecipes().then(setRecipes);
-    }, []);
+        if(user) {
+            UserApi.getUsers().then(setUsers);
+            CategoryApi.getCategories().then(setCategories);
+            ProductApi.getProducts().then(setProducts);
+            RecipeApi.getRecipes().then(setRecipes);
+            RecipeApi.findFavorites(user.id).then(setFavorites);
+        }
+    }, [user]);
 
     return (
         <>
@@ -45,6 +49,7 @@ function App() {
                     <Route path="/recipes" element={<Recipes/>}/>
                     <Route path="/recipes/:recipeId" element={<RecipePage/>}/>
                     <Route path="/home/categories" element={<AllCategoriesList/>}/>
+                    <Route path={"/personal_cabinet"} element={<PersonalInfo/>}/>
                     {user?.role === 'ADMIN' ? <Route path="/settings" element={<Settings/>}/> : null}
                     <Route path="*" element={<Navigate to={'/home'}/>}/>
                 </Routes>

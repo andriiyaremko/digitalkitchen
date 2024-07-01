@@ -4,14 +4,15 @@ import UserApi from "../../../Api/UserApi";
 import './auth.css';
 import handleHashPassword from "../../../Security";
 import {Link} from "react-router-dom";
+import {useUserStore} from "../../../Store/userStore";
 
 const CreateUser = () => {
     const [form] = Form.useForm()
-
+    const {login} = useUserStore();
     const onSubmit = () =>{
         form.validateFields().then(async values => {
             let encryptedPassword = await handleHashPassword(values.password);
-            UserApi.create({...values, password: encryptedPassword, role: 'USER'}).then()
+            UserApi.create({...values, password: encryptedPassword, role: 'USER'}).then(user => login(user));
             form.resetFields()
         })
     }
@@ -52,9 +53,10 @@ const CreateUser = () => {
                 <Form.Item
                     label="Enter your email"
                     name="email"
+
                     rules={[{ type:"email" ,required: true, message: 'Please input your password!' }]}
                 >
-                    <Input placeholder={"Email"}/>
+                    <Input autoComplete={""} placeholder={"Email"}/>
                 </Form.Item>
 
                 <Form.Item

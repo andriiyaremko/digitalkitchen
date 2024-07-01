@@ -63,3 +63,14 @@ CREATE TABLE IF NOT EXISTS public.comment
     rating INT,
     CONSTRAINT comment_id PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS public.favorite
+(
+    id UUID NOT NULL,
+    recipe_id UUID,
+    person_id UUID,
+    CONSTRAINT fk_recipe_id
+        FOREIGN KEY(recipe_id)   REFERENCES public.recipe(id),
+    CONSTRAINT fk_person_id
+        FOREIGN KEY(person_id)   REFERENCES public.person(id)
+)

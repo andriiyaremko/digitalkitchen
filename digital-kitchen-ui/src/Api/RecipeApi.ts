@@ -39,6 +39,17 @@ const ProductApi = {
     findById(id:string){
         return axios.get(`${URL}/${id}`)
             .then((response) =>response.data)
+    },
+    findFavorites(id:string){
+        return axios.get(`${URL}/favorite/${id}`)
+            .then((response) =>response.data)
+    },
+    addToFavorite(data:{id:string, recipeId:string, personId:string}){
+        return axios.post(`${URL}/favorite`, data)
+            .then((response) =>response.data)
+    },
+    removeFromFavorite(id:string){
+        return axios.delete(`${URL}/favorite/${id}`);
     }
 }
 
